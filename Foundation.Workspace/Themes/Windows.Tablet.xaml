@@ -1,0 +1,92 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:window="using:Foundation.Workspace.Windowing"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:controls1="using:Foundation.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Windows.Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="TabletWorkspaceWindowControlTemplate" TargetType="window:WorkspaceWindow">
+        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+            <Border.RenderTransform>
+                <CompositeTransform x:Name="PART_Transform" />
+            </Border.RenderTransform>
+            <controls:DropShadowPanel ShadowOpacity="{TemplateBinding ShadowOpacity}" Color="{TemplateBinding ShadowColor}"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch">
+                <Grid Background="{TemplateBinding Background}">
+                    <Grid x:Name="PART_ContentContainer" HorizontalAlignment="Center">
+                        <ContentPresenter x:Name="PART_Content"
+                                          HorizontalAlignment="Center"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+
+                        <controls1:AnnotationControl Name="PART_AnnotationControl" Scale="{Binding ElementName=PART_ControlTransform, Path=ScaleX}"
+                                                 Visibility="{Binding IsChecked, ElementName=PART_AnnotationButton, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    </Grid>
+                    <StackPanel x:Name="pnlControlButtonsNormal" 
+                                            Orientation="Horizontal" 
+                                            FlowDirection="RightToLeft"
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Right"
+                                            RenderTransformOrigin="0,1"
+                                Height="44"
+                                            Background="{StaticResource ChromeBackgroundBrush}">
+                        <StackPanel.RenderTransform>
+                            <CompositeTransform x:Name="PART_ControlTransform" />
+                        </StackPanel.RenderTransform>
+                        <!--you do not have to set commands for these buttons, handers are attached OnApplyTemplate-->
+
+                        <Button Name="PART_CloseButton" Style="{StaticResource CloseChromeButtonStyle}"/>
+                        <ToggleButton Name="PART_AnnotationButton" Style="{StaticResource AnnotationChromeButtonStyle}"/>
+                        <Button Name="PART_ScreenshotButton" Style="{StaticResource ScreenshotChromeButtonStyle}" 
+                                Visibility="{Binding IsChecked, ElementName=PART_AnnotationButton, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </StackPanel>
+                </Grid>
+            </controls:DropShadowPanel>
+        </Border>
+    </ControlTemplate>
+
+
+    <Style x:Key="TabletWorkspaceWindowStyle" TargetType="window:WorkspaceWindow" >
+        <Setter Property="Template" Value="{StaticResource TabletWorkspaceWindowControlTemplate}"/>
+        <Setter Property="IsLocked" Value="True" />
+        <Setter Property="IsFullscreen" Value="True" />
+    </Style>
+
+    <Style x:Key="TabletListViewItemWindowStyle" TargetType="ListViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="IsHoldingEnabled" Value="True"/>
+        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
+        <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <window:WorkspaceWindow Content="{TemplateBinding Content}"
+                                            Background="{Binding Content.WindowSettings.BackgroundColor,Converter={StaticResource IntToSolidColorBrushConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            ShadowColor="{Binding Content.WindowSettings.DropShadowColor,Converter={StaticResource IntToColorConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            ShadowOpacity="{Binding Content.WindowSettings.DropShadowOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            Style="{StaticResource TabletWorkspaceWindowStyle}"
+                                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

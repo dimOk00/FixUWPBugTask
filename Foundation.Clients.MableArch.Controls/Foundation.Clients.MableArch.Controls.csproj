@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F48D8D08-E7AB-422B-BAD2-CBA284AC497C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Foundation.Clients.MableArch.Controls</RootNamespace>
+    <AssemblyName>Foundation.Clients.MableArch.Controls</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ApartmentFinder\ApartmentFinderItem.cs" />
+    <Compile Include="ApartmentFinder\ApartmentFinderViewModel.cs" />
+    <Compile Include="ApartmentFinder\DataSchemaItemRenderer.cs" />
+    <Compile Include="ApartmentFinder\FullListingControl.xaml.cs">
+      <DependentUpon>FullListingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomContentItemViewModelFactoryFactory.cs" />
+    <Compile Include="Dial\Controls\DialMenuControl.cs" />
+    <Compile Include="Dial\Controls\DialMenuMediaControl.xaml.cs">
+      <DependentUpon>DialMenuMediaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dial\Controls\DialMenuSectionControl.cs" />
+    <Compile Include="Dial\Controls\JsonDialMenuControl.cs" />
+    <Compile Include="Dial\Controls\MenuItemDataTemplateSelector.cs" />
+    <Compile Include="Dial\Controls\MenuItemWithSubMenuUserControl.xaml.cs">
+      <DependentUpon>MenuItemWithSubMenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dial\DialContentItem.cs" />
+    <Compile Include="Dial\DialContentItemViewModel.cs" />
+    <Compile Include="Dial\DialControl.xaml.cs">
+      <DependentUpon>DialControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dial\Models\DialMenuDefinition.cs" />
+    <Compile Include="Dial\Models\MenuItem.cs" />
+    <Compile Include="Dial\Models\Section.cs" />
+    <Compile Include="Dial\Models\SubMenuItem.cs" />
+    <Compile Include="Dial\ViewModels\DialMenuControlViewModel.cs" />
+    <Compile Include="Dial\ViewModels\MenuItemViewModel.cs" />
+    <Compile Include="Dial\ViewModels\SectionViewModel.cs" />
+    <Compile Include="Dial\ViewModels\SubMenuItemViewModel.cs" />
+    <Compile Include="Menu\AnimatedLogo.xaml.cs">
+      <DependentUpon>AnimatedLogo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuListView.cs" />
+    <Compile Include="Menu\MenuSeparatorConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Foundation.Clients.MableArch.Controls.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>5.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\B.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ApartmentFinder\FullListingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dial\Controls\DialMenuMediaControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dial\Controls\MenuItemWithSubMenuUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dial\DialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dial\Themes\Generic.Dial.CommonResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dial\Themes\Generic.Dial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Menu\AnimatedLogo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Foundation.Controls\Foundation.Controls.csproj">
+      <Project>{23bbb88d-0b1a-4fef-a68c-f165102652ac}</Project>
+      <Name>Foundation.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation.Core\Foundation.Core.csproj">
+      <Project>{1a421e99-8fd8-436a-be55-86081e327a4e}</Project>
+      <Name>Foundation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation.Data\Foundation.Data.csproj">
+      <Project>{e400cac7-29a0-4a60-b46d-4adfc9d0aad3}</Project>
+      <Name>Foundation.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation.Networking\Foundation.Networking.csproj">
+      <Project>{4aa49cd5-6599-4225-a772-a9640d0d1a6c}</Project>
+      <Name>Foundation.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation.Shared\Foundation.Shared.csproj">
+      <Project>{01647c8a-9e5c-4095-8d31-65b406788417}</Project>
+      <Name>Foundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation.Workspace\Foundation.Workspace.csproj">
+      <Project>{e9fdf705-ea4e-4d80-9e16-bd66da21fa51}</Project>
+      <Name>Foundation.Workspace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.UWP\GhostCore.UWP.csproj">
+      <Project>{cbc5ac88-c4de-415a-b319-0fb1ca65c5f9}</Project>
+      <Name>GhostCore.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj">
+      <Project>{1c303a94-6033-4e65-a8ae-b9cbb03a9b68}</Project>
+      <Name>GhostCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

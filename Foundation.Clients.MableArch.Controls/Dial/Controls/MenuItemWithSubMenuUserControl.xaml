@@ -1,0 +1,167 @@
+﻿<UserControl
+    x:Class="Foundation.Clients.MableArch.Controls.Dial.MenuItemWithSubMenuUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Foundation.Clients.MableArch.Controls/Dial/Themes/Generic.Dial.CommonResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NegationConverter x:Key="BoolNegationConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SelectionStates">
+                <VisualState x:Name="NotSelected">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsCurrentMenuItem, Converter={StaticResource BoolNegationConverter}}" />
+                    </VisualState.StateTriggers>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainer"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0.5"
+                            Duration="0:0:0.2"/>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainerTransform"
+                            Storyboard.TargetProperty="ScaleX"
+                            To="1"
+                            Duration="0:0:0.2"/>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainerTransform"
+                            Storyboard.TargetProperty="ScaleY"
+                            To="1"
+                            Duration="0:0:0.2"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsCurrentMenuItem}" />
+                    </VisualState.StateTriggers>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainer"
+                            Storyboard.TargetProperty="Opacity"
+                            To="1"
+                            Duration="0:0:0.2"/>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainerTransform"
+                            Storyboard.TargetProperty="ScaleX"
+                            To="1.08"
+                            Duration="0:0:0.2"/>
+                        <DoubleAnimation
+                            Storyboard.TargetName="TextBlockContainerTransform"
+                            Storyboard.TargetProperty="ScaleY"
+                            To="1.08"
+                            Duration="0:0:0.2"/>
+                        <ObjectAnimationUsingKeyFrames
+                                    Storyboard.TargetName="TextBlock"
+                                    Storyboard.TargetProperty="FontFamily">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource DialMenuSelectedFont}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="SubMenuStates">
+                <VisualState x:Name="Hidden">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsSubMenuVisible, Converter={StaticResource BoolNegationConverter}}" />
+                    </VisualState.StateTriggers>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="SubMenu"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0"
+                            Duration="0:0:0.5"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Visible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsSubMenuVisible}" />
+                    </VisualState.StateTriggers>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="SubMenu"
+                            Storyboard.TargetProperty="Opacity"
+                            To="1"
+                            Duration="0:0:0.5"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
+        </VisualStateManager.VisualStateGroups>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Opacity="0.5" x:Name="TextBlockContainer">
+                <StackPanel.RenderTransform>
+                    <ScaleTransform x:Name="TextBlockContainerTransform"/>
+                </StackPanel.RenderTransform>
+                <TextBlock x:Name="TextBlock" Text="{Binding Title}" FontSize="{Binding FontSize}" Style="{StaticResource MenuItemTextStyle}">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform x:Name="TextScaleTransform"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Rectangle Height="6" Width="300" StrokeThickness="0" Margin="24 0 0 0" x:Name="MyRect" Fill="{StaticResource MenuTextColor}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Rectangle.RenderTransform>
+                        <ScaleTransform x:Name="RectScaleTransform" />
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </StackPanel>
+            <ItemsControl x:Name="SubMenu" Grid.Column="1" Grid.Row="1" Opacity="0" ItemsSource="{Binding SubMenuItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <UserControl>
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="SelectionStates">
+                                        <VisualState x:Name="NotSelected">
+                                            <VisualState.StateTriggers>
+                                                <StateTrigger IsActive="{Binding IsCurrentSubMenuItem, Converter={StaticResource BoolNegationConverter}}" />
+                                            </VisualState.StateTriggers>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                        Storyboard.TargetName="SubMenuItemText"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        To="0.3"
+                                                        Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.StateTriggers>
+                                                <StateTrigger IsActive="{Binding IsCurrentSubMenuItem}" />
+                                            </VisualState.StateTriggers>
+
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                        Storyboard.TargetName="SubMenuItemText"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        To="1"
+                                                        Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <TextBlock x:Name="SubMenuItemText" Text="{Binding Title}" FontSize="{Binding FontSize}" Style="{StaticResource SubMenuTextStyle}" Opacity="0.3"/>
+                            </Grid>
+                        </UserControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

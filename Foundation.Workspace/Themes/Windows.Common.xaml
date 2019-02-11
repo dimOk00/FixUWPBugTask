@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:window="using:Foundation.Workspace.Windowing"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:controls1="using:Foundation.Controls">
+
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    <chain:ChainConverter x:Key="InverseBoolToVisibilityConverter">
+        <chain:ChainConverter.Chain>
+            <converters:NegationConverter />
+            <converters:BoolToVisibilityConverter />
+        </chain:ChainConverter.Chain>
+    </chain:ChainConverter>
+
+    <AcrylicBrush x:Key="ChromeBackgroundBrush" 
+                  FallbackColor="Black"
+                  BackgroundSource="Backdrop"
+                  TintOpacity="0.5"
+                  TintColor="Black"/>
+
+
+</ResourceDictionary>

@@ -1,0 +1,64 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Workspace"
+    xmlns:menu="using:Foundation.Workspace.Menu"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:coreConv="using:Foundation.Core.Converters"
+    xmlns:ghostConv="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:controls="using:Foundation.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Workspace.Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+   
+    <ControlTemplate x:Key="WorkspaceTabletTemplate" TargetType="local:Workspace">
+        <Grid Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid Name="PART_BackgroundHost">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="295"/>
+                </Grid.RowDefinitions>
+                <ContentPresenter Content="{TemplateBinding WorkspaceBackground}" Grid.RowSpan="2"
+                                  ContentTemplateSelector="{StaticResource WorkspaceBackgroundTemplateSelector}"/>
+                
+                <ListView Name="PART_ItemsHost" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                      ItemsSource="{TemplateBinding WindowDataSource}" 
+                      ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                      Style="{TemplateBinding ItemsControlStyle}"
+                      ItemContainerStyle="{StaticResource TabletListViewItemWindowStyle}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+
+                <Grid Name="PART_MenuHost" Grid.Row="1">
+                    <menu:Menu x:Name="PART_Menu" 
+                               Style="{StaticResource TabletMenuStyle}"
+                               MenuSettings="{Binding AppData.Root.MenuSettings, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                               MenuItemsSource="{Binding AppData.Root.Children, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                </Grid>
+
+                <Grid Name="PART_ScreensaverHost" Visibility="Collapsed"
+                  animations:Implicit.ShowAnimations="{StaticResource ScreensaverShowAnimations}"
+                  animations:Implicit.HideAnimations="{StaticResource ScreensaverHideAnimations}">
+
+                    <Rectangle Fill="Green" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="TabletWorkspaceStyle" TargetType="local:Workspace" >
+        <Setter Property="Template" Value="{StaticResource WorkspaceTabletTemplate}" />
+        <Setter Property="ItemsControlStyle" Value="{StaticResource ListViewWithoutScrollViewer}" />
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource FoundationTemplateSelector}" />
+    </Style>
+
+</ResourceDictionary>

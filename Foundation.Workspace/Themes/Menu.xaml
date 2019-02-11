@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Workspace.Menu"
+    xmlns:ghostConv="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:coreConv="using:Foundation.Core.Converters"
+    xmlns:imaging="using:Foundation.Controls.Imaging"
+    xmlns:controls="using:Foundation.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Menu.Common.xaml" />
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Menu.Wall.xaml" />
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Menu.Tablet.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

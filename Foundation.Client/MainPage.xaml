@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="Foundation.Clients.MableArch.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Clients.MableArch"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:workspace="using:Foundation.Workspace"
+    xmlns:imaging="using:Foundation.Controls.Imaging"
+    xmlns:controls="using:Foundation.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--<Viewbox>-->
+        <!--<Grid Width="3840" Height="2160">-->
+        <!--<Grid Width="2736" Height="1824">-->
+            <workspace:Workspace WorkspaceBackground="{Binding RootConfiguration.SelectedSession.Root.WorkspaceSettings}"
+                             AppData="{Binding RootConfiguration.SelectedSession}"
+                             Style="{Binding RootConfiguration.HostType, Converter={StaticResource WorkspaceStyleConverter}}"/>
+
+        <!--</Grid>
+    </Viewbox>-->
+</Page>

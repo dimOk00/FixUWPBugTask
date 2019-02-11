@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StaticResource x:Key="DialMenuFont" ResourceKey="PrimaryFont"/>
+    <StaticResource x:Key="DialMenuSelectedFont" ResourceKey="PrimaryFont"/>
+
+    <SolidColorBrush x:Key="MenuTextColor" Color="White"/>
+    <Style x:Key="NextPreviousTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="60"/>
+        <Setter Property="Foreground" Value="{StaticResource MenuTextColor}"/>
+    </Style>
+    <Style x:Key="MenuItemTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="60"/>
+        <Setter Property="Foreground" Value="{StaticResource MenuTextColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource DialMenuFont}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="SubMenuTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="50"/>
+        <Setter Property="Foreground" Value="{StaticResource MenuTextColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource DialMenuFont}"/>
+    </Style>
+</ResourceDictionary>

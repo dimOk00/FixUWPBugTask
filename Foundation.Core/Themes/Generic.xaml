@@ -1,0 +1,18 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Core">
+
+    <Style TargetType="local:LoadingControl" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:LoadingControl">
+                    <StackPanel Orientation="Vertical">
+                        <ProgressRing Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" IsActive="True"/>
+                        <TextBlock Text="Loading..." Margin="0,20,0,0"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

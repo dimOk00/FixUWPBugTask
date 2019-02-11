@@ -1,0 +1,95 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Clients.MableArch.Style"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:window="using:Foundation.Workspace.Windowing"
+    xmlns:controls1="using:Foundation.Controls">
+
+    <Color x:Key="AlmacAccentColor">#8f7e54</Color>
+    <Color x:Key="AlmacBackgroundColor">#182718</Color>
+    <Color x:Key="AlmacTextColorDark">#414042</Color>
+
+    <SolidColorBrush x:Key="AlmacAccentColorBrush" Color="{StaticResource AlmacAccentColor}" />
+    <SolidColorBrush x:Key="AlmacBackgroundColorBrush" Color="{StaticResource AlmacBackgroundColor}" />
+    <SolidColorBrush x:Key="AlmacTextColorDarkBrush" Color="{StaticResource AlmacTextColorDark}" />
+
+    <ControlTemplate x:Key="WallWorkspaceWindowControlTemplate" TargetType="window:WorkspaceWindow">
+        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+            <Border.RenderTransform>
+                <CompositeTransform x:Name="PART_Transform" />
+            </Border.RenderTransform>
+            <controls:DropShadowPanel ShadowOpacity="{TemplateBinding ShadowOpacity}" Color="{TemplateBinding ShadowColor}"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  VerticalContentAlignment="Stretch">
+                <Grid Background="{TemplateBinding Background}">
+                    <Grid x:Name="PART_ContentContainer" HorizontalAlignment="Stretch">
+                        <ContentPresenter x:Name="PART_Content"
+                                          HorizontalAlignment="Stretch"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+
+                        <controls1:AnnotationControl Name="PART_AnnotationControl" Scale="{Binding ElementName=PART_ControlTransform, Path=ScaleX}"
+                                                 Visibility="{Binding IsChecked, ElementName=PART_AnnotationButton, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    </Grid>
+                    <StackPanel x:Name="pnlControlButtonsNormal" 
+                                            Orientation="Horizontal" 
+                                            FlowDirection="RightToLeft"
+                                            VerticalAlignment="Bottom"
+                                            HorizontalAlignment="Right"
+                                            RenderTransformOrigin="0,1"
+                                Background="{StaticResource ChromeBackgroundBrush}"
+                                    Height="44"
+                                            Visibility="{Binding IsFullscreen, Converter={StaticResource InverseBoolToVisibilityConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            >
+                        <StackPanel.RenderTransform>
+                            <CompositeTransform x:Name="PART_ControlTransform" />
+                        </StackPanel.RenderTransform>
+                        <!--you do not have to set commands for these buttons, handers are attached OnApplyTemplate-->
+
+                        <Button Name="PART_CloseButton" Style="{StaticResource CloseChromeButtonStyle}"/>
+                        <Button Name="PART_FullscreenButton" Style="{StaticResource FullscreenChromeButtonStyle}"/>
+                        <ToggleButton Name="PART_FavButton" Style="{StaticResource FavChromeButtonStyle}"/>
+                        <ToggleButton Name="PART_LockButton" Style="{StaticResource LockUnlockChromeButtonStyle}"/>
+                        <ToggleButton Name="PART_AnnotationButton" Style="{StaticResource AnnotationChromeButtonStyle}"/>
+                        <Button Name="PART_ScreenshotButton" Style="{StaticResource ScreenshotChromeButtonStyle}" 
+                                Visibility="{Binding IsChecked, ElementName=PART_AnnotationButton, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </StackPanel>
+
+                    <Grid x:Name="pnlControlButtonsFullscreen" 
+                          Grid.RowSpan="99"
+                          Visibility="{Binding IsFullscreen, Converter={StaticResource BoolToVisibilityConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                Background="{StaticResource ChromeBackgroundBrush}">
+                            <Button Name="btnFullCloseButtonLeft" Style="{StaticResource CloseChromeButtonStyle}" Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Button Name="btnFullRestoreButtonLeft" Style="{StaticResource RestoreChromeButtonStyle}" Command="{Binding RestoreCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+
+                            <ToggleButton Name="PART_AnnotationButtonLeft" Style="{StaticResource AnnotationChromeButtonStyle}"
+                                          IsChecked="{Binding IsChecked, ElementName=PART_AnnotationButton, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                Background="{StaticResource ChromeBackgroundBrush}">
+                            <Button Name="btnFullCloseButtonRight" Style="{StaticResource CloseChromeButtonStyle}" Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Button Name="btnFullRestoreButtonRight" Style="{StaticResource RestoreChromeButtonStyle}" Command="{Binding RestoreCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+
+                            <ToggleButton Name="PART_AnnotationButtonRight" Style="{StaticResource AnnotationChromeButtonStyle}"
+                                          IsChecked="{Binding IsChecked, ElementName=PART_AnnotationButton, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </controls:DropShadowPanel>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="window:WorkspaceWindow" >
+        <Setter Property="Template" Value="{StaticResource WallWorkspaceWindowControlTemplate}"/>
+    </Style>
+
+
+</ResourceDictionary>

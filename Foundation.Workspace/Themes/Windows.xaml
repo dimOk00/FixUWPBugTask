@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:window="using:Foundation.Workspace.Windowing"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:controls1="using:Foundation.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Windows.Common.xaml" />
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Windows.Wall.xaml" />
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Windows.Tablet.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

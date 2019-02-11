@@ -1,0 +1,159 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Workspace.Menu"
+    xmlns:ghostConv="using:GhostCore.UWP.Converters"
+    xmlns:chain="using:GhostCore.UWP.Converters.Chain"
+    xmlns:coreConv="using:Foundation.Core.Converters"
+    xmlns:imaging="using:Foundation.Controls.Imaging"
+    xmlns:controls="using:Foundation.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Foundation.Workspace/Themes/Menu.Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <AcrylicBrush x:Key="MenuBackgroundBrush"
+                  BackgroundSource="Backdrop"
+                  TintColor="White"
+                  TintOpacity="0.3"/>
+
+    <AcrylicBrush x:Key="MenuBackgroundBrushLight"
+                  BackgroundSource="Backdrop"
+                  TintColor="White"
+                  TintOpacity="0.5"/>
+
+    <SolidColorBrush x:Key="MenuSelectedColor" Color="#b3ffffff" />
+
+    <Style x:Key="MainTabletMenuItemContainerStyle" TargetType="ListViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="BorderThickness" Value="0,0,2,0" />
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="IsHoldingEnabled" Value="True"/>
+        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Width" Value="279"/>
+        <Setter Property="Height" Value="147"/>
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter
+                        TextWrapping="Wrap"
+                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                          SelectionCheckMarkVisualEnabled="True"
+                          CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                          CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                          DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                          DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                          FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                          FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                          PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                          PointerOverBackground="{StaticResource MenuSelectedColor}"
+                          PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                          SelectedBackground="#55FFFFFF"
+                          SelectedForeground="White"
+                          SelectedPointerOverBackground="{StaticResource MenuSelectedColor}"
+                          PressedBackground="{StaticResource MenuSelectedColor}"
+                          SelectedPressedBackground="{StaticResource MenuSelectedColor}"
+                          DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                          DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                          ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          ContentMargin="{TemplateBinding Padding}"
+                          CheckMode="Inline"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SubTabletMenuItemContainerStyle" TargetType="ListViewItem" BasedOn="{StaticResource MainTabletMenuItemContainerStyle}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0,0,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter
+                        TextWrapping="WrapWholeWords"
+                         ContentTransitions="{TemplateBinding ContentTransitions}"
+                          SelectionCheckMarkVisualEnabled="True"
+                          CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                          CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                          DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                          DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                          FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                          FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                          PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                          PointerOverBackground="{StaticResource MenuSelectedColor}"
+                          PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                          SelectedBackground="{StaticResource MenuSelectedColor}"
+                          SelectedForeground="Black"
+                          SelectedPointerOverBackground="{StaticResource MenuSelectedColor}"
+                          PressedBackground="{StaticResource MenuSelectedColor}"
+                          SelectedPressedBackground="{StaticResource MenuSelectedColor}"
+                          DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                          DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                          ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          ContentMargin="{TemplateBinding Padding}"
+                          CheckMode="Inline"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TabletMenuStyle" TargetType="local:Menu" >
+        <Setter Property="IsActive" Value="True" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Menu">
+                    <Border RequestedTheme="Dark"
+                            Background="{StaticResource MenuBackgroundBrush}"
+                            Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Rectangle Fill="#55FFFFFF" Grid.Row="1" Grid.Column="1"/>
+
+                            <imaging:UnrestrictedImage x:Name="PART_Logo" Grid.RowSpan="2" Grid.Column="0"
+                                                       UriSource="{Binding MenuSettings.LogoPath, Converter={StaticResource PathConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+
+                            <controls:IndicatedHorizontalListView x:Name="PART_MenuItems"
+                                      Grid.Column="1" Grid.Row="0"
+                                      ItemContainerStyle="{StaticResource MainTabletMenuItemContainerStyle}"
+                                      ItemTemplate="{StaticResource MenuItemDataTemplate}"
+                                      ItemsSource="{TemplateBinding MenuItemsSource}" />
+
+                            <controls:IndicatedHorizontalListView x:Name="PART_SubMenu" Grid.Row="1" Grid.Column="1"  
+                                      ItemContainerStyle="{StaticResource SubTabletMenuItemContainerStyle}"
+                                      ItemTemplate="{StaticResource MenuItemDataTemplate}"
+                                                  SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                      ItemsSource="{Binding ElementName=PART_MenuItems, Path=SelectedItem.Children, Mode=OneWay}" />
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Collapsed">
+                                <Button x:Name="PART_CloseAll" Content="Close All" HorizontalAlignment="Stretch" Visibility="Collapsed"/>
+                                <Button x:Name="PART_Back" Content="Back to Main Menu" HorizontalAlignment="Stretch" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

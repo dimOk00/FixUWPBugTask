@@ -1,0 +1,48 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Foundation.Controls"
+    xmlns:local2="using:Foundation.Controls.Imaging"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+
+    <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+
+    <Style TargetType="local:ContentExpander">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ContentExpander">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid>
+                            <!--<Rectangle x:Name="PART_HeightTarget" Opacity="0" VerticalAlignment="Top" />-->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="PART_HeaderRow" Height="Auto" MinHeight="20"/>
+                                    <RowDefinition x:Name="PART_ContentRow" Height="{Binding ElementName=PART_ContentRow, Path=MaxHeight,Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" 
+                                                   MaxHeight="0"/>
+                                </Grid.RowDefinitions>
+                                <Grid Name="PART_HeaderGrid">
+                                    <ContentPresenter Name="PART_HeaderPresenter"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+                                </Grid>
+
+
+                                <Grid Name="pnlContentGrid" Grid.Row="1" >
+                                    <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

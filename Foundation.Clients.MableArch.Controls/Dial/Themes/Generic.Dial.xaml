@@ -1,0 +1,360 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AlmacantarControl.Themes"
+    xmlns:converters="using:GhostCore.UWP.Converters"
+    xmlns:controls="using:Foundation.Clients.MableArch.Controls.Dial"
+    xmlns:foundationControls="using:Foundation.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Generic.Dial.CommonResources.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:NegationConverter x:Key="BoolNegationConverter"/>
+    <Style TargetType="controls:JsonDialMenuControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:JsonDialMenuControl">
+                    <controls:DialMenuControl x:Name="PART_DialMenuControl"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:DialMenuControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DialMenuControl">
+                    <UserControl>
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="NextPreviousStates">
+                                    <VisualState x:Name="NextHighlighted">
+                                        <VisualState.StateTriggers>
+                                            <StateTrigger IsActive="{Binding IsNextSectionButtonVisible}"/>
+                                        </VisualState.StateTriggers>
+                                        <Storyboard>
+                                            <!--<ObjectAnimationUsingKeyFrames
+                                                Storyboard.TargetName="PART_NextSectionTextBlock"
+                                                Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame Value="Visible"/>
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                            <DoubleAnimation
+                                                To="1"
+                                                Duration="0:0:0.2"
+                                                Storyboard.TargetName="PART_NextSectionTextBlock"
+                                                Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="NextSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleX"
+                                                To="1.08"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="NextSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleY"
+                                                To="1.08"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NextSectionTextTransform"
+                                            Storyboard.TargetProperty="TranslateX"
+                                            From="100"
+                                            To="0"
+                                            Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PreviousHighlighted">
+                                        <VisualState.StateTriggers>
+                                            <StateTrigger IsActive="{Binding IsPreviousSectionButtonVisible}"/>
+                                        </VisualState.StateTriggers>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                To="1"
+                                                Duration="0:0:0.2"
+                                                Storyboard.TargetName="PART_PreviousSectionTextBlock"
+                                                Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PreviousSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleX"
+                                                To="1.08"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PreviousSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleY"
+                                                To="1.08"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="PreviousSectionTextTransform"
+                                            Storyboard.TargetProperty="TranslateX"
+                                            From="-100"
+                                            To="0"
+                                            Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="NoneSelected">
+                                        <VisualState.StateTriggers>
+                                            <StateTrigger IsActive="{Binding ShouldHideNextAndPreviousButtons}"/>
+                                        </VisualState.StateTriggers>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                                To="0"
+                                                Duration="0:0:0.2"
+                                                Storyboard.TargetName="PART_NextSectionTextBlock"
+                                                Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation 
+                                                To="0"
+                                                Duration="0:0:0.2"
+                                                Storyboard.TargetName="PART_PreviousSectionTextBlock"
+                                                Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PreviousSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleX"
+                                                To="1"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PreviousSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleY"
+                                                To="1"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PreviousSectionTextTransform"
+                                                Storyboard.TargetProperty="TranslateX"
+                                                To="-100"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="NextSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleX"
+                                                To="1"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="NextSectionTextTransform"
+                                                Storyboard.TargetProperty="ScaleY"
+                                                To="1"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="NextSectionTextTransform"
+                                                Storyboard.TargetProperty="TranslateX"
+                                                To="100"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <QuadraticEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <foundationControls:VideoSwitchControl x:Name="PART_VideoSwitchControl"/>
+                            <Viewbox>
+                                <!-- TODO: Bind the height and width -->
+                                <Grid Width="{Binding HostedWidth}"
+                                      Height="{Binding HostedHeight}">
+                                    <ItemsControl x:Name="PART_SectionsItemsControl"
+                                          ItemsSource="{Binding Sections}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <controls:DialMenuSectionControl Section="{Binding}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <Grid/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                    <TextBlock
+                                        x:Name="PART_PreviousSectionTextBlock"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Text="Previous"
+                                        Style="{StaticResource NextPreviousTextStyle}"
+                                        Margin="48"
+                                        Opacity="0">
+                                        <TextBlock.RenderTransform>
+                                            <CompositeTransform x:Name="PreviousSectionTextTransform"/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                    <TextBlock
+                                        x:Name="PART_NextSectionTextBlock"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Text="Next"
+                                        Style="{StaticResource NextPreviousTextStyle}"
+                                        Margin="48"
+                                        Opacity="0">
+                                        <TextBlock.RenderTransform>
+                                            <CompositeTransform x:Name="NextSectionTextTransform"/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                </Grid>
+                            </Viewbox>
+                            <controls:DialMenuMediaControl x:Name="PART_DialMenuMediaControl"/>
+                        </Grid>
+                    </UserControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="MenuItemDataTemplate">
+        <UserControl>
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="SelectionStates">
+                        <VisualState x:Name="NotSelected">
+                            <VisualState.StateTriggers>
+                                <StateTrigger IsActive="{Binding IsCurrentMenuItem, Converter={StaticResource BoolNegationConverter}}" />
+                            </VisualState.StateTriggers>
+                            <Storyboard>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextBlock"
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            To="0.5"
+                                                            Duration="0:0:0.2"/>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextScaleTransform"
+                                                            Storyboard.TargetProperty="ScaleX"
+                                                            To="1"
+                                                            Duration="0:0:0.2"/>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextScaleTransform"
+                                                            Storyboard.TargetProperty="ScaleY"
+                                                            To="1"
+                                                            Duration="0:0:0.2"/>
+                            </Storyboard>
+
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.StateTriggers>
+                                <StateTrigger IsActive="{Binding IsCurrentMenuItem}" />
+                            </VisualState.StateTriggers>
+                            <Storyboard>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextBlock"
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            To="1"
+                                                            Duration="0:0:0.2"/>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextScaleTransform"
+                                                            Storyboard.TargetProperty="ScaleX"
+                                                            To="1.08"
+                                                            Duration="0:0:0.2"/>
+                                <DoubleAnimation
+                                                            Storyboard.TargetName="TextScaleTransform"
+                                                            Storyboard.TargetProperty="ScaleY"
+                                                            To="1.08"
+                                                            Duration="0:0:0.2"/>
+                                <ObjectAnimationUsingKeyFrames
+                                    Storyboard.TargetName="TextBlock"
+                                    Storyboard.TargetProperty="FontFamily">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource DialMenuSelectedFont}" />
+                                </ObjectAnimationUsingKeyFrames>
+                                    
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                    <VisualStateGroup x:Name="VisibleState">
+                        <VisualState x:Name="Visible">
+                            <VisualState.StateTriggers>
+                                <StateTrigger IsActive="{Binding IsVisible}" />
+                            </VisualState.StateTriggers>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="TextBlock"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="0.5"
+                                    Duration="0:0:0.5"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Hidden">
+                            <VisualState.StateTriggers>
+                                <StateTrigger IsActive="{Binding IsVisible, Converter={StaticResource BoolNegationConverter}}" />
+                            </VisualState.StateTriggers>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="TextBlock"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="0"
+                                    Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <TextBlock x:Name="TextBlock" FontSize="{Binding FontSize}" Grid.ColumnSpan="1" Text="{Binding Title}" Style="{StaticResource MenuItemTextStyle}" Opacity="0.5">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform x:Name="TextScaleTransform"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
+        </UserControl>
+    </DataTemplate>
+    <DataTemplate x:Key="MenuItemWithSubMenuDataTemplate">
+        <controls:MenuItemWithSubMenuUserControl/>
+    </DataTemplate>
+
+    <controls:MenuItemDataTemplateSelector x:Key="MenuItemDataTemplateSelector"
+                                           MenuItemDataTemplate="{StaticResource MenuItemDataTemplate}"
+                                           MenuItemWithSubMenuDataTemplate="{StaticResource MenuItemWithSubMenuDataTemplate}"/>
+    <Style TargetType="controls:DialMenuSectionControl">
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource MenuItemDataTemplateSelector}"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Opacity" Value="0"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>
