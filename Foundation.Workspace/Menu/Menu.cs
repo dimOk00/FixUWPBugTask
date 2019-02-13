@@ -210,12 +210,39 @@ namespace Foundation.Workspace.Menu
 
         internal void MoveTo(Point p, Panel container, bool useAnimation = true)
         {
+            p = AdjustPosition(p, container);
+
             if (useAnimation)
                 AnimateTo(p);
             else
                 TeleportTo(p);
 
             RemoteBus.Publish(new RemoteEvent(RemoteEventType.MoveMenuTo, new MoveToPayload() { Animate = useAnimation, X = p.X, Y = p.Y }), this);
+        }
+
+        private Point AdjustPosition(Point p, Panel container)
+        {
+            if (p.X < 0)
+            {
+                p.X = 0;
+            }
+
+            if (p.Y < 0)
+            {
+                p.Y = 0;
+            }
+
+            if (p.X > container.ActualWidth - ActualWidth)
+            {
+                p.X = container.ActualWidth - ActualWidth;
+            }
+
+            if (p.Y > container.ActualHeight - ActualHeight)
+            {
+                p.Y = container.ActualHeight - ActualHeight;
+            }
+
+            return p;
         }
 
         private void TeleportTo(Point p)

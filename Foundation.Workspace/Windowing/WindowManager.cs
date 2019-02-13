@@ -450,8 +450,46 @@ namespace Foundation.Workspace.Windowing
             if (wnd.IsFullscreen)
                 return;
 
-            transform.TranslateX += e.Delta.Translation.X;
-            transform.TranslateY += e.Delta.Translation.Y;
+            var currentPosition = new Point(transform.TranslateX, transform.TranslateY);
+            var deltaPosition = new Point(e.Delta.Translation.X, e.Delta.Translation.Y);
+
+            deltaPosition.X = GetDeltaX(wnd, currentPosition, deltaPosition);
+            deltaPosition.Y = GetDeltaY(wnd, currentPosition, deltaPosition);
+
+            transform.TranslateX += deltaPosition.X;
+            transform.TranslateY += deltaPosition.Y;
+        }
+
+        private double GetDeltaY(Window wnd, Point currentPosition, Point deltaPosition)
+        {
+            if (currentPosition.Y + deltaPosition.Y < 0)
+            {
+               return -currentPosition.Y;
+            }
+            else if (currentPosition.Y + wnd.ActualHeight + deltaPosition.Y > _workspace.ActualHeight)
+            {
+                return  -(currentPosition.Y + wnd.ActualHeight - _workspace.ActualHeight);
+            }
+            else
+            {
+                return deltaPosition.Y;
+            }
+        }
+
+        private double GetDeltaX(Window wnd, Point currentPosition, Point deltaPosition)
+        {
+            if (currentPosition.X + deltaPosition.X < 0)
+            {
+                return -currentPosition.X;
+            }
+            else if (currentPosition.X + wnd.ActualWidth + deltaPosition.X > _workspace.ActualWidth)
+            {
+                return -(currentPosition.X + wnd.ActualWidth - _workspace.ActualWidth);
+            }
+            else
+            {
+                return deltaPosition.X;
+            }
         }
 
         #endregion
